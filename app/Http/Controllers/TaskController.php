@@ -13,10 +13,12 @@ class TaskController extends Controller
         return view('task.index');
     }
 
+    // show individual task
     public function show(Workspace $workspace, Task $task) {
-    if ($workspace->user_id !== auth()->id()) {
-        abort(403);
-    }
+        if ($workspace->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         $task->deadline_human = $task->deadline ? Carbon::parse($task->deadline)->diffForHumans() : null;
         $task->completed_at = $task->completed_at ? Carbon::parse($task->completed_at)->diffForHumans() : null;
         return view('task.show', compact('workspace', 'task'));
@@ -46,10 +48,12 @@ class TaskController extends Controller
         return redirect()->route('workspace.show', $workspace)->with('success', 'Task created successfully.');
     }
 
+    // mark task as complete
     public function update(Request $request, Workspace $workspace, Task $task) {
-    if ($workspace->user_id !== auth()->id()) {
-        abort(403);
-    }
+        if ($workspace->user_id !== auth()->id()) {
+            abort(403);
+        }
+        
         $validated = $request->validate([
             'is_completed' => 'required|boolean'
         ]);
