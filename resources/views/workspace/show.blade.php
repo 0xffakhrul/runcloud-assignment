@@ -1,6 +1,13 @@
 <x-app-layout>
     <div class="bg-white rounded max-w-6xl mx-auto mt-6 px-6 py-4">
-        <h1 class="text-2xl font-semibold mb-2">Workspace: <span class="font-semibold">{{ $workspace->name }}</span></h1>
+        <div class="flex items-center gap-2 text-sm pb-4 text-gray-600"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-arrow-left-icon lucide-arrow-left">
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+            </svg><a href="{{ route('workspace.index') }}">Back to workspace</a></div>
+        <h1 class="text-2xl font-semibold mb-2">Workspace: <span class="font-semibold">{{ $workspace->name }}</span>
+        </h1>
         <div class="flex items-center justify-between pb-4">
             <h2 class="text-lg font-semibold mt-4 mb-2">Tasks</h2>
             <form action="{{ route('task.create', $workspace) }}" method="get">
